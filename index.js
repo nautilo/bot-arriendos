@@ -1,19 +1,53 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const request = require('request');
+const wikip = require('wiki-infobox-parser');
 
+//ejs
+app.set("view engine", 'ejs');
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.set('view engine','pug')
-
-app.get('/', function(request, response, next){
-    response.sendFile('index2.html',{root: __dirname});
+//routes
+app.get('/', (req,res) =>{
+    res.render('index');
 });
 
-app.post('/', function(request, response, next){
-	response.send(request.body);
+app.get('/index', (req,response) =>{
+    let url = "https://en.wikipedia.org/w/api.php"
+    let params = {
+        action: "opensearch",
+        search: req.query.person,
+        limit: "1",
+        namespace: "0",
+        format: "json"
+    }
+
+    url = url + "?"
+    Object.keys(params).forEach( (key) => {
+        url += '&' + key + '=' + params[key]; 
+    });
+
+    //get wikip search string
+    request(url,(err,res, body) =>{
+        if(err) {
+            response.redirect('404');
+        }
+            result = JSON.parse(body);
+            x = result[3][0];
+            x = x.substring(30, x.length); 
+            //get wikip json
+            wikip(x , (err, final) => {
+                if (err){
+                    response.redirect('404');
+                }
+                else{
+                    const answers = final;
+                    response.send(answers);
+                }
+            });
+    });
+
+    
 });
 
-
-app.listen(port);
+//port
+app.listen(3000, console.log("Listening at port 3000..."))
