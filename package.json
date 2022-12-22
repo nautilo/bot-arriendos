@@ -1,28 +1,16 @@
 {
-  "name": "simple-nodejs-app",
+  "name": "deploy-to-render",
   "version": "1.0.0",
-  "description": "Research about a person",
   "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
-    "start": "nodemon index.jsn",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "build": "echo 'Bulding.... (not actually doing something, but usually I would)'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rat9615/simple-nodejs-app.git"
-  },
-  "author": "Rohan R",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rat9615/simple-nodejs-app/issues"
-  },
-  "homepage": "https://github.com/rat9615/simple-nodejs-app#readme",
   "dependencies": {
-    "ejs": "^3.1.7",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.3",
-    "request": "^2.88.2",
-    "wiki-infobox-parser": "^0.1.11"
+    "express": "^4.17.1"
   }
 }
