@@ -7,27 +7,7 @@ let now = moment().format("DD/MM/YYYY")
 /**
  * Instancia del bot de Whatsapp
  */
-const client = new Client({
-  authStrategy: new LocalAuth()
-});
 
-
-client.on('qr', qr => {
-  qrcode.generate(qr, {small: true});
-});
-
-client.on('ready', () => {
-  console.log('Client is ready!');
-
-});
-
-client.on('message', message => {
-if(message.body === 'quediaes') {
-  message.reply(now);
-}
-});
-
-client.initialize();
 
 /**
  * Render en html
@@ -38,5 +18,26 @@ server.use((req, res) => {
 
 const PORT = process.env.PORT || 3000
 server.listen(PORT, () => {
+  const client = new Client({
+    authStrategy: new LocalAuth()
+  });
+  
+  
+  client.on('qr', qr => {
+    qrcode.generate(qr, {small: true});
+  });
+  
+  client.on('ready', () => {
+    console.log('Client is ready!');
+  
+  });
+  
+  client.on('message', message => {
+  if(message.body === 'quediaes') {
+    message.reply(now);
+  }
+  });
+  
+  client.initialize();
   console.log('Server listening on http://localhost:' + PORT)
 })
