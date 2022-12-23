@@ -11,6 +11,9 @@
     "build": "echo 'Bulding.... (not actually doing something, but usually I would)'"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "moment": "^2.29.4",
+    "whatsapp-web.js": "^1.18.4",
+    "qrcode-terminal":"^0.12.0"
   }
 }
